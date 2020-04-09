@@ -1,37 +1,43 @@
 <template>
-<div class="navbar">
-  <div class="right-menu">
-    <el-dropdown
-      class="avatar-container right-menu-item hover-effect"
-      trigger="click"
-    >
-      <div class="avatar-wrapper">
-        <el-avatar icon="el-icon-user-solid" />
-        <i class="el-icon-caret-bottom" />
-      </div>
-      <el-dropdown-menu slot="dropdown">
-        <router-link :to="{name: 'Profile'}">
-          <el-dropdown-item>
-            Profile
-          </el-dropdown-item>
-        </router-link>
-        <el-dropdown-item
-          divided
-          @click.native="logout"
-        >
+  <div class="navbar">
+    <div class="right-menu">
+      <lang-select class="right-menu-item hover-effect" />
+      <el-dropdown
+        class="avatar-container right-menu-item hover-effect"
+        trigger="click"
+      >
+        <div class="avatar-wrapper">
+          <el-avatar icon="el-icon-user-solid" />
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link :to="{name: 'Profile'}">
+            <el-dropdown-item>
+              {{ $t('navbar.profile') }}
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item
+            divided
+            @click.native="logout"
+          >
             <span style="display:block;">
-              Logout
+              {{ $t('navbar.logout') }}
             </span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
+import LangSelect from '@/components/LangSelect'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  components: {
+    LangSelect
+  }
 }
 </script>
 

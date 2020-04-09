@@ -1,12 +1,12 @@
 <template>
-<el-container direction="vertical">
-  <Navbar />
-  <el-main>
-    <transition name="fade-transform" mode="out-in">
-      <router-view />
-    </transition>
-  </el-main>
-</el-container>
+  <el-container direction="vertical">
+    <Navbar />
+    <el-main>
+      <transition name="fade-transform" mode="out-in">
+        <router-view />
+      </transition>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
