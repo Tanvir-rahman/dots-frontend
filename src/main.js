@@ -10,6 +10,12 @@ import '@hikaya/vue-ui-components/dist/hikaya-ui-components.css'
 import i18n from './lang' // internalization
 import './icons' // icon
 import './auth' // auth control
+import { makeServer } from './api/server'
+
+console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV === 'development') {
+  makeServer()
+}
 
 Vue.config.productionTip = false
 
