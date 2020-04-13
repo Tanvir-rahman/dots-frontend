@@ -7,13 +7,36 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/redirect',
+    component: Main,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: Auth,
     children: [
       {
         path: '',
         component: () => import('@/views/login/index.vue'),
-        name: 'login',
+        name: 'Login',
+        hidden: true
+      }
+    ]
+  },
+  {
+    path: '/thank-you',
+    component: Auth,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/register/ThankYou.vue'),
+        name: 'ThankYou',
         hidden: true
       }
     ]
@@ -26,7 +49,7 @@ const routes = [
       {
         path: 'home',
         component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
-        name: 'home',
+        name: 'Home',
         meta: {
           title: 'home'
         }

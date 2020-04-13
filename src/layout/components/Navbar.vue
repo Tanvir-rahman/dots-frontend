@@ -37,6 +37,12 @@ export default {
   name: 'Navbar',
   components: {
     LangSelect
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      await this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    }
   }
 }
 </script>
