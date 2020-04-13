@@ -34,6 +34,5 @@ export function makeServer({ environment = 'development' } = {}) {
       })
     }
   })
-  window.server = server
   return server
 }
