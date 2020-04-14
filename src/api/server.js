@@ -13,7 +13,7 @@ export function makeServer({ environment = 'development' } = {}) {
     },
     routes() {
       this.namespace = 'api'
-      // this.namespace = ''
+      this.urlPrefix = 'http://127.0.0.1:8000'
 
       this.post('/token', (schema, request) => {
         console.log(request)
