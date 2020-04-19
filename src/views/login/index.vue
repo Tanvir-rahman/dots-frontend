@@ -1,30 +1,28 @@
 <template>
   <div class="login-container">
-    <el-card class="box-card">
-      <lang-select class="lang-select" />
-      <el-form ref="loginForm" :model="formData" :rules="rules">
-        <el-form-item :label="$t('login.username')" prop="username">
-          <el-input v-model="formData.username" />
-        </el-form-item>
-        <el-form-item :label="$t('login.password')" prop="password">
-          <el-input v-model="formData.password" show-password />
-        </el-form-item>
-        <el-form-item>
-          <el-button :loading="loading" type="primary" @click="login('loginForm')">{{ $t('login.login') }}</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+    <el-form ref="loginForm" class="login-form" :model="formData" :rules="rules">
+      <div class="header">
+        <h2>{{ $t('login.header') }}</h2>
+      </div>
+      <el-form-item prop="username">
+        <el-input v-model="formData.username" prefix-icon="el-icon-user" :placheholder="$t('login.username')" />
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input ref="password" v-model="formData.password" prefix-icon="el-icon-lock" :placheholder="$t('login.password')" show-password />
+        <router-link class="forgot-password" to="">{{ $t('login.forgotPassword') }}</router-link>
+      </el-form-item>
+      <el-form-item>
+        <span>{{ $t('login.noAccount') }}<br><router-link class="register" :to="{name: 'Register'}">{{ $t('register.register') }}</router-link></span>
+        <el-button :loading="loading" type="primary" @click="login('loginForm')">{{ $t('login.login') }}</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect'
 
 export default {
   name: 'Login',
-  components: {
-    LangSelect
-  },
   data() {
     return {
       formData: {
@@ -33,13 +31,14 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: 'This field is required', trigger: 'blur' }
+          { required: true, message: this.$t('general.requiredField'), trigger: 'blur' }
         ],
         password: [
-          { required: true, message: 'This field is required', trigger: 'blur' }
+          { required: true, message: this.$t('general.requiredField'), trigger: 'blur' }
         ]
       },
       loading: false,
+      passwordType: 'password',
       redirect: undefined,
       otherQuery: {}
     }
@@ -57,6 +56,16 @@ export default {
     }
   },
   methods: {
+    showPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      })
+    },
     login() {
       this.$refs.loginForm.validate(isValid => {
         if (isValid) {
@@ -88,24 +97,62 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  $bg:#283443;
+  $light_gray:#fff;
+  $cursor: #fff;
+
   .login-container {
-    display: flex;
-    justify-content: center;
-    padding: 40px;
+    vertical-align: middle;
+    min-height: 100%;
+    width: 100%;
 
-    .box-card {
-      width: 600px;
+    .login-form {
+      position: relative;
+      width: 300px;
+      max-width: 100%;
+      padding: 160px 35px 0;
+      margin: 0 auto;
+      overflow: hidden;
+    }
 
-      .lang-select {
+    .el-input {
+      height: 47px;
+
+      input {
+        height: 47px;
+      }
+    }
+
+    .header {
+      margin-bottom: 40px;
+      color: #25ced1;
+    }
+
+    .el-form-item {
+      border-radius: 5px;
+      color: #454545;
+      margin-bottom: 30px;
+
+      .forgot-password {
         float: right;
+        color: #bdbec3;
+      }
 
-        &.hover-effect {
-          cursor: pointer;
-          transition: background .3s;
+      .el-button {
+        float: right;
+        min-width: 30%;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+      }
 
-          &:hover {
-            background: rgba(0, 0, 0, .025)
-          }
+      span {
+        float: left;
+        line-height: 20px;
+
+        .register {
+          float: left;
+          color: #25ced1;
         }
       }
     }

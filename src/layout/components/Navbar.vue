@@ -1,7 +1,6 @@
 <template>
   <div class="navbar">
     <div class="right-menu">
-      <lang-select class="right-menu-item hover-effect" />
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
         trigger="click"
@@ -31,13 +30,9 @@
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect'
 
 export default {
   name: 'Navbar',
-  components: {
-    LangSelect
-  },
   methods: {
     async logout() {
       await this.$store.dispatch('user/logout')

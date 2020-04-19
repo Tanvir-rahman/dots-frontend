@@ -1,12 +1,32 @@
 export default {
+  general: {
+    requiredField: 'This field is required'
+  },
   navbar: {
     profile: 'Profile',
     logout: 'Logout'
   },
   login: {
-    username: 'Username',
+    username: 'Email or username',
     password: 'Password',
-    login: 'Login'
+    login: 'Log in',
+    header: 'Log in to Dots',
+    noAccount: 'Don\'t have an account',
+    forgotPassword: 'Forgot Password'
+  },
+  register: {
+    createAccount: 'Create an account',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    username: 'Username',
+    email: 'Email',
+    password: 'Password',
+    confirmPassword: 'Confirm Password',
+    haveAccount: 'Already have an account',
+    register: 'Register',
+    passwordMismatch: 'Passwords do not match',
+    minimumCharacters: 'At least 8 characters is required',
+    invalidEmail: 'Invalid email'
   },
   thankYou: {
     title: 'Thank you for registering!',

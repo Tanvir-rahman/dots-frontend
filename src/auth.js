@@ -7,7 +7,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', '/thank-you'] // no redirect whitelist
+const whiteList = [/login/, /thank-you/, /register/] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -16,38 +16,36 @@ router.beforeEach(async(to, from, next) => {
   // set page title
   document.title = getPageTitle(to.meta.title)
 
-  // determine whether the user has logged in
-  const hasToken = getToken()
+  if (whiteList.some(rx => rx.test(to.path))) {
+    // in the free login whitelist, go directly
+    next()
+  } else {
+    // determine whether the user has logged in
+    const hasToken = getToken()
 
-  if (hasToken) {
-    if (to.path === '/login') {
-      // if is logged in, redirect to the home page
-      next({ path: '/' })
-      NProgress.done()
-    } else {
-      const nameLoaded = !!store.getters.name
-
-      if (nameLoaded) {
-        next()
+    if (hasToken) {
+      if (to.path === '/login') {
+        // if is logged in, redirect to the home page
+        next({ path: '/' })
+        NProgress.done()
       } else {
-        try {
-          await store.dispatch('user/getInfo')
-          next({ ...to, replace: true })
-        } catch (e) {
-          await store.dispatch('user/resetToken')
-          next(`/login?redirect=${to.path}`)
-          NProgress.done()
+        const nameLoaded = !!store.getters.name
+
+        if (nameLoaded) {
+          next()
+        } else {
+          try {
+            await store.dispatch('user/getInfo')
+            next({ ...to, replace: true })
+          } catch (e) {
+            await store.dispatch('user/resetToken')
+            next(`/login?redirect=${to.path}`)
+            NProgress.done()
+          }
         }
       }
-    }
-  } else {
-    /* has no token*/
-
-    if (whiteList.indexOf(to.path) !== -1) {
-      // in the free login whitelist, go directly
-      next()
     } else {
-      // other pages that do not have permission to access are redirected to the login page.
+      /* has no token*/
       next(`/login?redirect=${to.path}`)
       NProgress.done()
     }

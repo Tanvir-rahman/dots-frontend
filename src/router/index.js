@@ -30,6 +30,18 @@ const routes = [
     ]
   },
   {
+    path: '/register',
+    component: Auth,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/register/index.vue'),
+        name: 'Register',
+        hidden: true
+      }
+    ]
+  },
+  {
     path: '/thank-you',
     component: Auth,
     children: [

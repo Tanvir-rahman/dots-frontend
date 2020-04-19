@@ -23,8 +23,15 @@ export default {
 .el-row {
   padding-top: 10%;
 
+  h2 {
+    color: #25ced1;
+  }
+
   .el-button {
     margin-top: 20px;
+    font-size: 1.1rem;
+    /*display: flex;*/
+    /*justify-content: center;*/
   }
 }
 </style>
