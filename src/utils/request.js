@@ -4,6 +4,7 @@ import { getToken } from '@/utils/auth'
 import snakecaseKeys from 'snakecase-keys'
 import camelcaseKeys from 'camelcase-keys'
 import { getRefreshToken } from './auth'
+import { Message } from 'element-ui'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -43,8 +44,7 @@ service.interceptors.response.use(
     console.log('' + error)
     const origRequest = error.config
     const response = error.response
-    console.log(origRequest)
-    if (response.status === 401) {
+    if (response.status === 401 && origRequest.url !== '/token') {
       if (origRequest.url.includes('token/refresh')) {
         console.log('Refresh has expired')
         store.dispatch('user/resetToken').then(() => {
@@ -56,6 +56,9 @@ service.interceptors.response.use(
         await store.dispatch('user/setToken', refreshData.access)
         return service(origRequest)
       }
+    } else if (response.status === 401) {
+      const message = response.data.detail
+      Message.error(message)
     }
     return Promise.reject(error)
   }

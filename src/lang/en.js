@@ -4,7 +4,7 @@ export default {
   },
   navbar: {
     profile: 'Profile',
-    logout: 'Logout',
+    logout: 'Log out',
     dashboard: 'Dashboard',
     maps: 'Maps',
     reports: 'Reports',

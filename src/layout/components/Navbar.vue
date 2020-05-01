@@ -1,32 +1,4 @@
 <template>
-  <!--  <div class="navbar">-->
-  <!--    <div class="right-menu">-->
-  <!--      <el-dropdown-->
-  <!--        class="avatar-container right-menu-item hover-effect"-->
-  <!--        trigger="click"-->
-  <!--      >-->
-  <!--        <div class="avatar-wrapper">-->
-  <!--          <el-avatar icon="el-icon-user-solid" />-->
-  <!--          <i class="el-icon-caret-bottom" />-->
-  <!--        </div>-->
-  <!--        <el-dropdown-menu slot="dropdown">-->
-  <!--          <router-link :to="{name: 'Profile'}">-->
-  <!--            <el-dropdown-item>-->
-  <!--              {{ $t('navbar.profile') }}-->
-  <!--            </el-dropdown-item>-->
-  <!--          </router-link>-->
-  <!--          <el-dropdown-item-->
-  <!--            divided-->
-  <!--            @click.native="logout"-->
-  <!--          >-->
-  <!--            <span style="display:block;">-->
-  <!--              {{ $t('navbar.logout') }}-->
-  <!--            </span>-->
-  <!--          </el-dropdown-item>-->
-  <!--        </el-dropdown-menu>-->
-  <!--      </el-dropdown>-->
-  <!--    </div>-->
-  <!--  </div>-->
   <top-nav class="navbar">
     <router-link :to="{name: 'Dashboard'}">
       <div class="brand">
@@ -37,13 +9,15 @@
     <div class="nav-menu">
       <router-link v-for="item in navItems" :key="item.name" :to="{name: item.name}">{{ item.label }}</router-link>
     </div>
-    <div class="avatar-wrapper">
-      <el-avatar shape="square" @click="showDrawer">TB</el-avatar>
+    <div class="avatar-wrapper" @click="toggleDrawer">
+      <el-avatar shape="square">{{ nameInitials }}</el-avatar>
     </div>
   </top-nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { EventBus, TOGGLE_DRAWER } from '@/utils/bus'
 
 export default {
   name: 'Navbar',
@@ -66,15 +40,25 @@ export default {
           name: 'Tables',
           label: this.$t('navbar.tables')
         }
-      ]
+      ],
+      showDrawer: false
+    }
+  },
+  computed: {
+    ...mapGetters(['name']),
+    nameInitials: function() {
+      let initials = ''
+      const names = this.name.split(' ')
+      for (const name of names) {
+        initials += name.charAt(0).toUpperCase()
+      }
+      return initials
     }
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      await this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-    },
-    showDrawer() {}
+    toggleDrawer() {
+      EventBus.$emit(TOGGLE_DRAWER)
+    }
   }
 }
 </script>
