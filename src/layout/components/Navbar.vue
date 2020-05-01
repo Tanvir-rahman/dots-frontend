@@ -7,7 +7,7 @@
       </div>
     </router-link>
     <div class="nav-menu">
-      <router-link v-for="item in navItems" :key="item.name" :to="{name: item.name}">{{ item.label }}</router-link>
+      <router-link v-for="item in navItems" :key="item.name" :to="{name: item.name}" class="body-bold">{{ item.label }}</router-link>
     </div>
     <div class="avatar-wrapper" @click="toggleDrawer">
       <el-avatar shape="square">{{ nameInitials }}</el-avatar>
@@ -92,11 +92,6 @@ export default {
 
     .nav-menu {
       margin-right: auto;
-      font-family: "Lato", sans-serif;
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 22px;
-      color: #666666;
       margin-left: 100px;
 
       a {

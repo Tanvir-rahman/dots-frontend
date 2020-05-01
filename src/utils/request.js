@@ -42,8 +42,17 @@ service.interceptors.response.use(
   },
   async error => {
     console.log('' + error)
+    console.log(error)
+
+    // Handle networking connection issues
+    if (isNetworkIssue(error)) {
+      Message.error('Network error')
+      return Promise.reject(error)
+    }
+
     const origRequest = error.config
     const response = error.response
+
     if (response.status === 401 && origRequest.url !== '/token') {
       if (origRequest.url.includes('token/refresh')) {
         console.log('Refresh has expired')
@@ -60,8 +69,12 @@ service.interceptors.response.use(
       const message = response.data.detail
       Message.error(message)
     }
+
     return Promise.reject(error)
   }
 )
+
+export const isNetworkIssue = (error) => ('' + error).includes('Network Error') ||
+  error.response.status === 408 || error.code === 'ECONNABORTED'
 
 export default service

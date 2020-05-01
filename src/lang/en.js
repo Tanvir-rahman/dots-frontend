@@ -8,7 +8,8 @@ export default {
     dashboard: 'Dashboard',
     maps: 'Maps',
     reports: 'Reports',
-    tables: 'Tables'
+    tables: 'Tables',
+    logoutConfirm: 'Are you sure you want to log out?'
   },
   login: {
     username: 'Email or username',

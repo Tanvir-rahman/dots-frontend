@@ -1,0 +1,136 @@
+/* Title - Lato B48 */
+
+.title {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 58px;
+    color: #C4C4C4;
+}
+
+/* Heading - Lato B35 */
+
+.heading {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 42px;
+    color: #C4C4C4;
+}
+
+/* Button - Lato R22 */
+
+.button {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 26px;
+    color: #C4C4C4;
+}
+
+/* Body Bold - Lato B18 */
+
+.bold-body {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #C4C4C4;
+}
+
+/* Body Reg - Lato R18 */
+
+.body-reg {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #C4C4C4;
+}
+
+/* Footer - Lato R15 */
+
+.footer {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    color: #C4C4C4;
+}
+
+/* Info - Lato R11 */
+
+.info {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    color: #C4C4C4;
+}
+
+/* White */
+.white {
+    background: #FFFFFF;
+}
+
+.primary-blue {
+    /* Primary Blue */
+    background: #33CCCC;
+}
+
+/* Secondary Orange */
+.secondary-orange {
+    background: #FF6633;
+}
+
+/* Heading - Grey */
+.heading-grey {
+    background: #666666;
+}
+
+/* Dark Body Grey */
+.dark-body-grey {
+    background: #333333;
+}
+
+/* Light Body Grey */
+.light-body-grey {
+    background: #CCCCCC;
+}
+
+/* Green */
+.green {
+    background: #00CC66;
+}
+
+/* Green Fill */
+.green-fill {
+    background: #E5FAF0;
+}
+
+/* Red */
+.red {
+    background: #FF3333;
+}
+
+/* Red Fill */
+.red-fill {
+    background: #FFEBEB;
+}
+
+/* Background Color */
+.background-color {
+    background: #F8F8F8;
+}
+
+/* Purple */
+.purple {
+    background: #6633CC;
+}

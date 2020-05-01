@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth'
 import getPageTitle from '@/utils/get-page-title'
+import { isNetworkIssue } from './utils/request'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -38,8 +39,10 @@ router.beforeEach(async(to, from, next) => {
             await store.dispatch('user/getInfo')
             next({ ...to, replace: true })
           } catch (e) {
-            await store.dispatch('user/resetToken')
-            next(`/login?redirect=${to.path}`)
+            if (!isNetworkIssue(e)) {
+              await store.dispatch('user/resetToken')
+              next(`/login?redirect=${to.path}`)
+            }
             NProgress.done()
           }
         }

@@ -5,12 +5,17 @@
       <transition name="fade-transform" mode="out-in">
         <router-view />
       </transition>
-      <basic-drawer :visible.sync="showDrawer" direction="rtl" size="50%" :show-close="false" :with-header="false">
-        <div class="drawer">
-          <div class="header">
-            <span class="username">{{ username }}</span>
-            <span class="logout" @click="logout">{{ $t('navbar.logout') }}</span>
-          </div>
+      <basic-drawer
+        :visible.sync="showDrawer"
+        direction="rtl"
+        size="50%"
+        :show-close="false"
+        :with-header="false"
+        custom-class="drawer"
+      >
+        <div class="header">
+          <span class="username heading">{{ username }}</span>
+          <span class="logout bold-body" @click="logout">{{ $t('navbar.logout') }}</span>
         </div>
       </basic-drawer>
     </el-main>
@@ -39,9 +44,11 @@ export default {
     })
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      await this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    logout() {
+      this.$confirm(this.$t('navbar.logoutConfirm')).then(async() => {
+        await this.$store.dispatch('user/logout')
+        await this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      })
     }
   }
 }
@@ -56,21 +63,9 @@ export default {
     margin-left: 30px;
     align-items: center;
 
-    .username {
-      font-family: Lato, sans-serif;
-      font-size: 35px;
-      line-height: 42px;
-      font-weight: bold;
-      color: #333333;
-    }
-
     .logout {
       margin-left: auto;
       cursor: pointer;
-      font-family: Lato, sans-serif;
-      font-size: 18px;
-      line-height: 22px;
-      color: #333333;
     }
   }
 }

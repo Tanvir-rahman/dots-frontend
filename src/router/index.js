@@ -63,7 +63,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
         name: 'Dashboard',
         meta: {
-          title: 'dashboard'
+          title: 'Dashboard'
         }
       }
     ]
