@@ -56,14 +56,59 @@ const routes = [
   {
     path: '/',
     component: Main,
-    redirect: '/home',
+    redirect: '/dashboard',
     children: [
       {
-        path: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
-        name: 'Home',
+        path: 'dashboard',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+        name: 'Dashboard',
         meta: {
-          title: 'home'
+          title: 'dashboard'
+        }
+      }
+    ]
+  },
+  {
+    path: '/maps',
+    component: Main,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "maps" */ '@/views/maps/index.vue'),
+        name: 'Maps',
+        meta: {
+          title: 'Maps'
+        }
+      }
+    ]
+  },
+  {
+    path: '/tables',
+    component: Main,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "tables" */ '@/views/tables/index.vue'),
+        name: 'Tables',
+        meta: {
+          title: 'Tables'
+        }
+      }
+    ]
+  },
+  {
+    path: '/reports',
+    component: Main,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "reports" */ '@/views/reports/index.vue'),
+        name: 'Reports',
+        meta: {
+          title: 'Reports'
         }
       }
     ]
@@ -71,11 +116,10 @@ const routes = [
   {
     path: '/profile',
     component: Main,
-    redirect: '/profile/index',
     meta: { hidden: true },
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import(/* webpackChunkName: "profile" */ '@/views/profile/index.vue'),
         name: 'Profile',
         meta: {

@@ -4,7 +4,11 @@ export default {
   },
   navbar: {
     profile: 'Profile',
-    logout: 'Logout'
+    logout: 'Logout',
+    dashboard: 'Dashboard',
+    maps: 'Maps',
+    reports: 'Reports',
+    tables: 'Tables'
   },
   login: {
     username: 'Email or username',

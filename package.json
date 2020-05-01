@@ -10,7 +10,7 @@
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
-    "@hikaya/vue-ui-components": "^0.2.0",
+    "@hikaya/vue-ui-components": "^0.2.6",
     "axios": "^0.19.2",
     "camelcase-keys": "^6.2.2",
     "core-js": "^3.6.4",
