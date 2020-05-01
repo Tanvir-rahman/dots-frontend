@@ -1,6 +1,9 @@
 <template>
   <div class="navbar">
-    <div class="right-menu">
+    <div>
+      <router-link :to="{ name: 'Tables' }">Tables</router-link>
+    </div>
+    <div class="navbar__right-menu">
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
         trigger="click"
@@ -10,15 +13,12 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link :to="{name: 'Profile'}">
+          <router-link :to="{ name: 'Profile' }">
             <el-dropdown-item>
               {{ $t('navbar.profile') }}
             </el-dropdown-item>
           </router-link>
-          <el-dropdown-item
-            divided
-            @click.native="logout"
-          >
+          <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">
               {{ $t('navbar.logout') }}
             </span>
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Navbar',
   methods: {
@@ -45,24 +44,19 @@ export default {
 <style scoped lang="scss">
 .navbar {
   height: 50px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 8px;
 
-  .right-menu {
-    float: right;
-    height: 100%;
-    line-height: 50px;
-
+  &__right-menu {
     &:focus {
       outline: none;
     }
 
     .right-menu-item {
-      display: inline-block;
-      padding: 0 8px;
       height: 100%;
       font-size: 18px;
       color: #5a5e66;
@@ -70,10 +64,10 @@ export default {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, .025)
+          background: rgba(0, 0, 0, 0.025);
         }
       }
     }
@@ -82,14 +76,11 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
-        position: relative;
-
         .user-avatar {
           cursor: pointer;
           width: 40px;
           height: 40px;
-          border-radius: 10px;
+          // border-radius: 10px;
         }
 
         .el-icon-caret-bottom {

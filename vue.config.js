@@ -8,6 +8,7 @@ function resolve(dir) {
 const name = 'Dots'
 
 module.exports = {
+  lintOnSave: false,
   configureWebpack: {
     name: name,
     resolve: {

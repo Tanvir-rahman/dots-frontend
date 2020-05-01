@@ -60,7 +60,8 @@ const routes = [
     children: [
       {
         path: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+        component: () =>
+          import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
         name: 'Home',
         meta: {
           title: 'home'
@@ -76,10 +77,39 @@ const routes = [
     children: [
       {
         path: 'index',
-        component: () => import(/* webpackChunkName: "profile" */ '@/views/profile/index.vue'),
+        component: () =>
+          import(/* webpackChunkName: "profile" */ '@/views/profile/index.vue'),
         name: 'Profile',
         meta: {
           title: 'Profile'
+        }
+      }
+    ]
+  },
+  {
+    path: '/tables',
+    component: Main,
+    redirect: '/tables/index',
+    meta: { hidden: true },
+    children: [
+      {
+        path: 'index',
+        component: () =>
+          import(/* webpackChunkName: "tables" */ '@/views/tables/index.vue'),
+        name: 'Tables',
+        meta: {
+          title: 'Table List'
+        }
+      },
+      {
+        path: 'details/:tableUuid',
+        component: () =>
+          import(
+            /* webpackChunkName: "tables-details" */ '@/views/tables/TableDetails.vue'
+          ),
+        name: 'TableDetails',
+        meta: {
+          title: 'Table Data'
         }
       }
     ]

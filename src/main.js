@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import moment from 'moment'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import store from './store'
@@ -12,6 +13,8 @@ import './icons' // icon
 import './auth' // auth control
 
 Vue.config.productionTip = false
+Vue.prototype.$moment = moment
+Vue.prototype.$notify = ElementUI.Notification
 
 Vue.use(ElementUI, {
   i18n: (key, value) => i18n.t(key, value)
