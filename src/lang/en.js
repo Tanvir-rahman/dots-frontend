@@ -36,5 +36,34 @@ export default {
     title: 'Thank you for registering!',
     description: 'Please confirm your email to log in to the application.',
     logIn: 'Log in'
+  },
+  tables: {
+    importLabel: 'Import Data',
+    importCsv: 'Import CSV Data',
+    listTable: {
+      tableUuid: 'Table uuid',
+      tableName: 'Name',
+      source: 'Source',
+      createDate: 'Create date',
+      updateDate: 'Update date'
+    },
+    csvImportForm: {
+      name: 'Name',
+      uniqueColumn: 'Unique column',
+      attachFiles: 'attach csv files with a size less than 500kb',
+      drag: 'Drop file here or',
+      clickUpload: 'click to upload'
+    }
+  },
+  actionVerbs: {
+    submit: 'Submit',
+    cancel: 'Cancel',
+    save: 'Save',
+    add: 'Add'
+  },
+  notifications: {
+    'successDelete': '{table} was successfully deleted',
+    'successEdit': '{table} was successfully edited',
+    'successCreate': '{table} was successfully created'
   }
 }

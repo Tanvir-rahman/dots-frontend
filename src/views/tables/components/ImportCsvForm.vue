@@ -1,0 +1,193 @@
+<template>
+  <div class="import-csv-form">
+    <el-form ref="form" :model="form" label-position="top">
+      <div class="import-csv-form__fields">
+        <el-form-item :label="$t('tables.csvImportForm.name')" class="import-csv-form__field-item">
+          <el-input v-model="form.name" />
+          <span class="import-csv-form__help-text">Leave blank to default to the file name</span>
+        </el-form-item>
+
+        <el-form-item :label="$t('tables.csvImportForm.uniqueColumn')" class="import-csv-form__field-item">
+          <el-input v-model="form.unique_column" />
+          <span class="import-csv-form__help-text">Ensure the field exists and correctly spelt</span>
+        </el-form-item>
+      </div>
+
+      <el-upload
+        v-if="!table"
+        class="import-csv-form__upload-area"
+        action=""
+        drag
+        :auto-upload="false"
+        :file-list="form.files"
+        :limit="1"
+        accept="csv"
+        :on-change="setFile"
+      >
+        <i class="el-icon-upload" />
+        <div class="el-upload__text">
+          {{ $t('tables.csvImportForm.drag') }} <em>{{ $t('tables.csvImportForm.clickUpload') }}</em>
+        </div>
+        <div slot="tip" class="el-upload__tip">
+          {{ $t('tables.csvImportForm.attachFiles') }}
+        </div>
+      </el-upload>
+      <div class="import-csv-form__action-btns">
+        <el-button @click="$emit('closeModal')">{{ $t('actionVerbs.cancel') }}</el-button>
+        <el-button type="primary" :loading="saving" @click="saveData">{{ $t('actionVerbs.submit') }}</el-button>
+      </div>
+    </el-form>
+  </div>
+</template>
+
+<script>
+import { toBase64 } from '@/utils/data.utils'
+import { tableActions } from '@/store/modules/tables'
+
+const EVENT_CLOSE = 'closeModal'
+
+export default {
+  name: 'ImportCsvForm',
+  props: {
+    table: { type: Object, required: false, default: null }
+  },
+  data() {
+    return {
+      form: {
+        name: this.table && this.table.name || '',
+        unique_column: this.table && this.table.uniqueColumn || '',
+        data: {},
+        source: 'csv'
+      },
+      saving: false,
+      editing: false
+    }
+  },
+
+  watch: {
+    table: {
+      handler(x) {
+        this.initForm()
+      },
+      immediate: true
+    }
+  },
+
+  methods: {
+    /**
+       * Save data
+       */
+    saveData() {
+      this.saving = true
+      if (this.table) {
+        this.editTable()
+      } else {
+        this.createTable()
+      }
+    },
+
+    /**
+       * create table
+       **/
+    createTable() {
+      this.$store.dispatch(`tables/${tableActions.CREATE_TABLE}`, this.form).then(table => {
+        this.$emit(EVENT_CLOSE)
+        this.$notify({
+          title: 'Success',
+          message: this.$t('notifications.successCreate', { table: table.name }),
+          type: 'success'
+        })
+      }).finally(() => {
+        this.saving = false
+      })
+    },
+
+    /**
+       * edit table
+       */
+    editTable() {
+      this.$store.dispatch(
+        `tables/${tableActions.EDIT_TABLE}`, {
+          changes: {
+            name: this.form.name,
+            unique_column: this.form.unique_column
+          },
+          uuid: this.table.tableUuid
+        }).then(table => {
+        this.$emit(EVENT_CLOSE)
+        this.$notify({
+          title: 'Success',
+          message: this.$t('notifications.successEdit', { table: table.name }),
+          type: 'success'
+        })
+      }).finally(() => {
+        this.saving = false
+      })
+    },
+
+    setFile(file, fileList) {
+      console.log(file)
+      if (!this.form.name) {
+        this.form.name = file.name.split('.').slice(0, -1).join('.')
+      }
+      toBase64(file.raw).then(base64File => {
+        this.form.data.value = base64File.split(';base64,')[1]
+      })
+    },
+
+    initForm() {
+      this.form = {
+        name: this.table && this.table.name || '',
+        unique_column: this.table && this.table.uniqueColumn || '',
+        data: {},
+        source: 'csv'
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .import-csv-form {
+    &__upload-area {
+      width: 100%;
+    }
+
+    &__fields {
+      display: flex;
+    }
+
+    &__field-item {
+      flex: 1;
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: unset;
+      }
+    }
+
+    &__action-btns {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__help-text {
+      font-size: 14px;
+      color: #25CED1;
+    }
+  }
+</style>
+
+<style lang="scss">
+  .import-csv-form {
+    .el-upload {
+      width: 100%;
+    }
+
+    .el-upload-dragger {
+      width: 100%;
+    }
+
+  }
+</style>

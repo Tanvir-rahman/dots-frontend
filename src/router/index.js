@@ -127,6 +127,34 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/tables',
+    component: Main,
+    redirect: '/tables/index',
+    meta: { hidden: true },
+    children: [
+      {
+        path: 'index',
+        component: () =>
+          import(/* webpackChunkName: "tables" */ '@/views/tables/index.vue'),
+        name: 'Tables',
+        meta: {
+          title: 'Table List'
+        }
+      },
+      {
+        path: 'details/:tableUuid',
+        component: () =>
+          import(
+            /* webpackChunkName: "tables-details" */ '@/views/tables/TableDetails.vue'
+          ),
+        name: 'TableDetails',
+        meta: {
+          title: 'Table Data'
+        }
+      }
+    ]
   }
 ]
 
