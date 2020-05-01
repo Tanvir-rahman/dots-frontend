@@ -84,21 +84,6 @@ const routes = [
     ]
   },
   {
-    path: '/tables',
-    component: Main,
-    meta: { hidden: true },
-    children: [
-      {
-        path: '',
-        component: () => import(/* webpackChunkName: "tables" */ '@/views/tables/index.vue'),
-        name: 'Tables',
-        meta: {
-          title: 'Tables'
-        }
-      }
-    ]
-  },
-  {
     path: '/reports',
     component: Main,
     meta: { hidden: true },
@@ -131,11 +116,10 @@ const routes = [
   {
     path: '/tables',
     component: Main,
-    redirect: '/tables/index',
     meta: { hidden: true },
     children: [
       {
-        path: 'index',
+        path: '',
         component: () =>
           import(/* webpackChunkName: "tables" */ '@/views/tables/index.vue'),
         name: 'Tables',
