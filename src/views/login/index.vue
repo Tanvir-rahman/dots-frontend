@@ -77,7 +77,6 @@ export default {
             })
             .catch((e) => {
               this.loading = false
-              this.$message.error('Invalid credentials')
             })
         } else {
           return false

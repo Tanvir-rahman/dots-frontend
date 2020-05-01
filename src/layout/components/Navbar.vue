@@ -1,97 +1,121 @@
 <template>
-  <div class="navbar">
-    <div>
-      <router-link :to="{ name: 'Tables' }">Tables</router-link>
+  <top-nav class="navbar">
+    <router-link :to="{name: 'Dashboard'}">
+      <div class="brand">
+        <img class="logo" src="@/assets/logo.png">
+        <h1>Dots</h1>
+      </div>
+    </router-link>
+    <div class="nav-menu">
+      <router-link v-for="item in navItems" :key="item.name" :to="{name: item.name}">{{ item.label }}</router-link>
     </div>
-    <div class="navbar__right-menu">
-      <el-dropdown
-        class="avatar-container right-menu-item hover-effect"
-        trigger="click"
-      >
-        <div class="avatar-wrapper">
-          <el-avatar icon="el-icon-user-solid" />
-          <i class="el-icon-caret-bottom" />
-        </div>
-        <el-dropdown-menu slot="dropdown">
-          <router-link :to="{ name: 'Profile' }">
-            <el-dropdown-item>
-              {{ $t('navbar.profile') }}
-            </el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">
-              {{ $t('navbar.logout') }}
-            </span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+    <div class="avatar-wrapper" @click="toggleDrawer">
+      <el-avatar shape="square">{{ nameInitials }}</el-avatar>
     </div>
-  </div>
+  </top-nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { EventBus, TOGGLE_DRAWER } from '@/utils/bus'
+
 export default {
   name: 'Navbar',
+  data: function() {
+    return {
+      navItems: [
+        {
+          name: 'Dashboard',
+          label: this.$t('navbar.dashboard')
+        },
+        {
+          name: 'Maps',
+          label: this.$t('navbar.maps')
+        },
+        {
+          name: 'Reports',
+          label: this.$t('navbar.reports')
+        },
+        {
+          name: 'Tables',
+          label: this.$t('navbar.tables')
+        }
+      ],
+      showDrawer: false
+    }
+  },
+  computed: {
+    ...mapGetters(['name']),
+    nameInitials: function() {
+      let initials = ''
+      const names = this.name.split(' ')
+      for (const name of names) {
+        initials += name.charAt(0).toUpperCase()
+      }
+      return initials
+    }
+  },
   methods: {
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      await this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    toggleDrawer() {
+      EventBus.$emit(TOGGLE_DRAWER)
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.navbar {
-  height: 50px;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 8px;
+  .navbar {
+    height: 50px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
 
-  &__right-menu {
-    &:focus {
-      outline: none;
-    }
-
-    .right-menu-item {
+    .brand {
+      display: flex;
       height: 100%;
-      font-size: 18px;
-      color: #5a5e66;
-      vertical-align: text-bottom;
+      margin-right: auto;
+      align-items: center;
 
-      &.hover-effect {
-        cursor: pointer;
-        transition: background 0.3s;
+      .logo {
+        height: 32px;
+      }
 
-        &:hover {
-          background: rgba(0, 0, 0, 0.025);
-        }
+      h1 {
+        margin-left: 20px;
+        color: #33CCCC;
+        font-family: "Lato", sans-serif;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 38px;
       }
     }
 
-    .avatar-container {
-      margin-right: 30px;
+    .nav-menu {
+      margin-right: auto;
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 22px;
+      color: #666666;
+      margin-left: 100px;
 
-      .avatar-wrapper {
-        .user-avatar {
-          cursor: pointer;
-          width: 40px;
-          height: 40px;
-          // border-radius: 10px;
-        }
+      a {
+        text-decoration: none;
+        margin-right: 75px;
+      }
+    }
 
-        .el-icon-caret-bottom {
-          cursor: pointer;
-          position: absolute;
-          right: -20px;
-          top: 25px;
-          font-size: 12px;
-        }
+    .avatar-wrapper {
+      margin-left: auto;
+
+      .el-avatar {
+        background: rgba(255, 102, 51, 0.5);
+        font-family: Lato, sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #333333;
+        cursor: pointer;
       }
     }
   }
-}
 </style>
