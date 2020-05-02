@@ -97,6 +97,8 @@ export default {
       a {
         text-decoration: none;
         margin-right: 75px;
+        font-family: 'Lato';
+        color: #666666;
       }
     }
 
