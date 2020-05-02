@@ -14,7 +14,6 @@ import './auth' // auth control
 
 Vue.config.productionTip = false
 Vue.prototype.$moment = moment
-Vue.prototype.$notify = ElementUI.Notification
 
 Vue.use(ElementUI, {
   i18n: (key, value) => i18n.t(key, value)

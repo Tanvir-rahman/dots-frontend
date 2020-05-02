@@ -68,7 +68,7 @@ const actions = {
    */
   async [tableActions.CREATE_TABLE]({ commit }, payload) {
     try {
-      const table = postTable(payload)
+      const table = await postTable(payload)
       commit(mutationTypes.SET_TABLE, table)
       return table
     } catch (e) {
