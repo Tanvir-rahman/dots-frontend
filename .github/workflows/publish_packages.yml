@@ -1,0 +1,25 @@
+name: Publish-Packages
+
+on: 
+  push:
+    branches: 
+      - ISS-37
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      # - run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" >> .npmrc
+      - run: |
+          chmod +x .github/workflows/publish_script.sh
+          bash .github/workflows/publish_script.sh
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          # OTP_PASS : ${{ secrets.OTP_PASS }}
+        
+    
