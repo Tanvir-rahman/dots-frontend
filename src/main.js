@@ -6,7 +6,6 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import VueUiComponents from '@hikaya/vue-ui-components'
-import '@hikaya/vue-ui-components/dist/hikaya-ui-components.css'
 
 import i18n from './lang' // internalization
 import './icons' // icon

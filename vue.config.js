@@ -8,6 +8,13 @@ function resolve(dir) {
 const name = 'Dots'
 
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "~@hikaya/vue-ui-components/src/styles/theme.scss";`
+      }
+    }
+  },
   lintOnSave: false,
   configureWebpack: {
     name: name,
