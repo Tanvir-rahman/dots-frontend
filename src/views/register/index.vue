@@ -30,7 +30,7 @@
       </div>
       <div class="footer">
         <span class="login-container">{{ $t('register.haveAccount') }}<br><router-link class="login" :to="{name: 'Login'}">{{ $t('login.login') }}</router-link></span>
-        <el-button :loading="loading" type="primary" @click="register()">{{ $t('register.register') }}</el-button>
+        <h-button :loading="loading" type="primary" @click="register()">{{ $t('register.register') }}</h-button>
       </div>
     </el-form>
   </div>
@@ -125,7 +125,7 @@ export default {
       position: relative;
       width: 600px;
       max-width: 100%;
-      padding: 160px 35px 0;
+      padding: 160px 35px 35px 0;
       margin: 0 auto;
       overflow: hidden;
 
@@ -144,12 +144,12 @@ export default {
 
     .header {
       margin-bottom: 40px;
-      color: #25ced1;
+      color: $primary-color;
     }
 
     .el-form-item {
       border-radius: 5px;
-      color: #454545;
+      color: $dark-body-grey;
       margin-bottom: 30px;
     }
 
@@ -174,7 +174,7 @@ export default {
 
         .login {
           float: left;
-          color: #25ced1;
+          color: $primary-color;
         }
       }
     }

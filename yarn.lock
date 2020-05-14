@@ -835,10 +835,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hikaya/vue-ui-components@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@hikaya/vue-ui-components/-/vue-ui-components-0.3.2.tgz#fb78af5fc0ac71acb550321f97261d188199cb4b"
-  integrity sha512-fDtt9qYWoqnDauqOuBEiA3uTFE+ChpC9WTowaHGq6q6j5EEAV5AqWyBVi967Yt2hpAMwGe9KWc7o4Z1YRRmKdg==
+"@hikaya/vue-ui-components@^0.3.11":
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/@hikaya/vue-ui-components/-/vue-ui-components-0.3.11.tgz#63b6dbfc2465d5b3a3021a1ca156e7a1539fccf1"
+  integrity sha512-dS1G2bbzXB/eTOK0zcqVJw1q45FhP+Pnb7eQnnY2T8QVpHAM1gSAU0WYMjuI5UFhDmgihgpdbTe+VnZYTNC9fQ==
   dependencies:
     core-js "^3.6.4"
     vue "^2.6.11"

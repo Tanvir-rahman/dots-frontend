@@ -5,14 +5,14 @@
       <transition name="fade-transform" mode="out-in">
         <router-view />
       </transition>
-      <basic-drawer :visible.sync="showDrawer" direction="rtl" size="50%" :show-close="false" :with-header="false">
+      <h-drawer :visible.sync="showDrawer" direction="rtl" size="50%" :show-close="false" :with-header="false">
         <div class="drawer">
           <div class="header">
             <span class="username">{{ username }}</span>
             <span class="logout" @click="logout">{{ $t('navbar.logout') }}</span>
           </div>
         </div>
-      </basic-drawer>
+      </h-drawer>
     </el-main>
   </el-container>
 </template>

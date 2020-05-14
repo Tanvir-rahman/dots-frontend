@@ -4,7 +4,7 @@
     <template>
       <div class="table-list__item-list">
         <div class="table-list__import-btn">
-          <el-button type="primary" @click="showModal = true">{{ $t('tables.importLabel') }}</el-button>
+          <h-button type="primary" @click="showModal = true">{{ $t('tables.importLabel') }}</h-button>
         </div>
 
         <div class="table-list__table-cont">
@@ -42,27 +42,27 @@
               width="160"
             >
               <template slot-scope="scope">
-                <el-button
+                <h-button
                   type="text"
                   size="small"
                   @click="$router.push({name: 'TableDetails', params: { tableUuid:scope.row.tableUuid }})"
                 >
                   Detail
-                </el-button>
-                <el-button
+                </h-button>
+                <h-button
                   type="text"
                   size="small"
                   @click="editTable(scope.row)"
                 >
                   Edit
-                </el-button>
-                <el-button
+                </h-button>
+                <h-button
                   type="text"
                   size="small"
                   @click="deleteTable(scope.row)"
                 >
                   Delete
-                </el-button>
+                </h-button>
               </template>
             </el-table-column>
           </el-table>
@@ -162,15 +162,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .table-list {
-    display: flex;
-    justify-content: center;
-    &__item-list {
-      width: 80%;
-    }
-    &__import-btn {
-      display: flex;
-      flex-direction: row-reverse;
-    }
+.table-list {
+  display: flex;
+  justify-content: center;
+  &__item-list {
+    width: 80%;
   }
+  &__import-btn {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+.el-button--text {
+  padding: 1.5px 4px;
+  border-radius: 30px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
 </style>

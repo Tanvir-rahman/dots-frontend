@@ -82,8 +82,8 @@ export default {
 
       h1 {
         margin-left: 20px;
-        color: #33CCCC;
-        font-family: "Lato", sans-serif;
+        color: $primary-color;
+        font-family: $main-font-family;
         font-weight: bold;
         font-size: 32px;
         line-height: 38px;
@@ -92,29 +92,15 @@ export default {
 
     .nav-menu {
       margin-right: auto;
-      font-family: "Lato", sans-serif;
-      font-weight: bold;
+      font-family: $main-font-family;
       font-size: 18px;
       line-height: 22px;
-      color: #666666;
+      color: $heading-grey;
       margin-left: 100px;
 
       a {
         text-decoration: none;
         margin-right: 75px;
-      }
-    }
-
-    .avatar-wrapper {
-      margin-left: auto;
-
-      .el-avatar {
-        background: rgba(255, 102, 51, 0.5);
-        font-family: Lato, sans-serif;
-        font-weight: bold;
-        font-size: 18px;
-        color: #333333;
-        cursor: pointer;
       }
     }
   }

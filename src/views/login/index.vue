@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item>
         <span>{{ $t('login.noAccount') }}<br><router-link class="register" :to="{name: 'Register'}">{{ $t('register.register') }}</router-link></span>
-        <el-button :loading="loading" type="primary" @click="login('loginForm')">{{ $t('login.login') }}</el-button>
+        <h-button :loading="loading" type="primary" @click="login('loginForm')">{{ $t('login.login') }}</h-button>
       </el-form-item>
     </el-form>
   </div>
@@ -96,8 +96,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  $bg:#283443;
-  $light_gray:#fff;
+  $bg: $heading-grey;
+  $light_gray:$heading-grey;
   $cursor: #fff;
 
   .login-container {
@@ -124,17 +124,17 @@ export default {
 
     .header {
       margin-bottom: 40px;
-      color: #25ced1;
+      color: $primary-color;
     }
 
     .el-form-item {
       border-radius: 5px;
-      color: #454545;
+      color: $dark-body-grey;
       margin-bottom: 30px;
 
       .forgot-password {
         float: right;
-        color: #bdbec3;
+        color: $light-body-grey;
       }
 
       .el-button {
@@ -151,7 +151,7 @@ export default {
 
         .register {
           float: left;
-          color: #25ced1;
+          color: $primary-color;
         }
       }
     }
