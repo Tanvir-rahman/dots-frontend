@@ -1,6 +1,6 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-col :span="12">
+    <el-col :span="24">
       <h2 class="title">{{ $t('thankYou.title') }}</h2>
       <p class="body-2-reg">{{ $t('thankYou.description') }}</p>
       <h-button type="primary" @click="goToLogin">{{ $t('thankYou.logIn') }} {{ 6 - count }}</h-button>
@@ -35,7 +35,7 @@ export default {
 
 <style scoped lang="scss">
 .el-row {
-  padding-top: 10%;
+  padding-top: 20%;
 
   .el-col {
     display: flex;
@@ -44,7 +44,8 @@ export default {
   }
 
   h2 {
-    color: $primary-color
+    color: $primary-color;
+    text-align: center;
   }
 
   p {
