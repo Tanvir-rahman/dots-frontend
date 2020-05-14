@@ -3,7 +3,7 @@
     <el-col :span="12">
       <h2 class="title">{{ $t('thankYou.title') }}</h2>
       <p class="body-2-reg">{{ $t('thankYou.description') }}</p>
-      <h-button type="primary" @click="goToLogin">{{ $t('thankYou.logIn') }}</h-button>
+      <h-button type="primary" @click="goToLogin">{{ $t('thankYou.logIn') }} {{ 6 - count }}</h-button>
     </el-col>
   </el-row>
 </template>
@@ -11,6 +11,20 @@
 <script>
 export default {
   name: 'ThankYou',
+  data: () => {
+    return {
+      count: 1
+    }
+  },
+  created() {
+    const handler = setInterval(() => {
+      this.count++
+      if (this.count === 5) {
+        clearInterval(handler)
+        this.goToLogin()
+      }
+    }, 1000)
+  },
   methods: {
     goToLogin() {
       this.$router.push({ name: 'Login' })
