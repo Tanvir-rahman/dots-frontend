@@ -37,6 +37,13 @@ export default {
     description: 'Please confirm your email to log in to the application.',
     logIn: 'Log in'
   },
+  error: {
+    404: {
+      title: '404!',
+      description: 'It appears this page is missing',
+      action: 'GO HOME'
+    }
+  },
   tables: {
     importLabel: 'Import Data',
     importCsv: 'Import CSV Data',
