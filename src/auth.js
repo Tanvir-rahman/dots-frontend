@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth'
 import getPageTitle from '@/utils/get-page-title'
+import { workspaceActions } from '@/store/modules/workspace'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -30,12 +31,20 @@ router.beforeEach(async(to, from, next) => {
         NProgress.done()
       } else {
         const nameLoaded = !!store.getters.name
+        const workspacesLoaded = store.getters.workspacesLoaded
 
-        if (nameLoaded) {
+        if (nameLoaded && workspacesLoaded) {
           next()
         } else {
           try {
-            await store.dispatch('user/getInfo')
+            if (!nameLoaded) {
+              await store.dispatch('user/getInfo')
+            }
+
+            if (!workspacesLoaded) {
+              await store.dispatch(`workspace/${workspaceActions.GET_WORKSPACES}`)
+            }
+
             next({ ...to, replace: true })
           } catch (e) {
             await store.dispatch('user/resetToken')

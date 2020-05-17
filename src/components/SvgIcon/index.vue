@@ -1,38 +1,37 @@
 <template>
-  <svg :class="className" xmlns="http://www.w3.org/2000/svg">
-    <title v-if="title">{{ title }}</title>
-    <use :xlink:href="iconPath" xmlns:xlink="http://www.w3.org/1999/xlink" />
+  <svg :class="svgClass" aria-hidden="true">
+    <use :xlink:href="name" />
   </svg>
 </template>
 
 <script>
+// https://webpack.js.org/guides/dependency-management/#context-module-api
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+const req = require.context('../../icons/svg', false, /\.svg$/)
+requireAll(req)
+
 export default {
   name: 'SvgIcon',
-
   props: {
-    name: {
+    iconName: {
+      // icon filename
       type: String,
       required: true
     },
-
-    title: {
+    className: {
+      // css class name
       type: String,
-      default: null
+      default: ''
     }
   },
-
   computed: {
-    iconPath() {
-      let icon = require(`@/icons/svg/${this.name}.svg`)
-      if (Object.prototype.hasOwnProperty.call(icon, 'default')) {
-        icon = icon.default
-      }
-
-      return icon.url
+    name() {
+      const icon = this.iconName
+      return icon ? `#icon-${icon}` : ''
     },
-
-    className() {
-      return 'svg-icon svg-icon--' + this.name
+    svgClass() {
+      const className = this.className
+      return className ? `svg-icon ${className}` : 'svg-icon'
     }
   }
 }
@@ -40,8 +39,9 @@ export default {
 
 <style>
   .svg-icon {
-    fill: currentColor;
-    height: 24px;
-    width: 24px;
+    width: 1em;
+    height: 1em;
+    fill: currentColor; /* important */
+    overflow: hidden;
   }
 </style>
