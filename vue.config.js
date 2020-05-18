@@ -122,7 +122,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "~@hikaya/vue-ui-components/src/styles/theme.scss";`
+        prependData: `@import "~@hikaya/hakawati/src/styles/theme.scss";`
       }
     }
   },
