@@ -1,13 +1,25 @@
 <template>
   <top-nav class="navbar">
-    <router-link :to="{name: 'Dashboard'}">
+    <router-link
+      :to="{path: '/ws/redirect'}"
+      :disabled="!hasWorkspace"
+      :event="hasWorkspace ? 'click' : ''"
+      :style="!hasWorkspace ? 'cursor: default' : ''"
+    >
       <div class="brand">
         <img class="logo" src="@/assets/logo.png">
         <h1>Dots</h1>
       </div>
     </router-link>
     <div class="nav-menu">
-      <router-link v-for="item in navItems" :key="item.name" :to="{name: item.name}">{{ item.label }}</router-link>
+      <router-link
+        v-for="item in navItems"
+        :key="item.name"
+        :to="{name: item.name}"
+        :disabled="!hasWorkspace"
+        :event="hasWorkspace ? 'click' : ''"
+        :style="!hasWorkspace ? 'cursor: default' : ''"
+      >{{ item.label }}</router-link>
     </div>
     <div class="avatar-wrapper" @click="toggleDrawer">
       <el-avatar shape="square">{{ nameInitials }}</el-avatar>
@@ -45,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['name']),
+    ...mapGetters(['name', 'hasWorkspace']),
     nameInitials: function() {
       let initials = ''
       const names = this.name.split(' ')
@@ -102,6 +114,10 @@ export default {
         text-decoration: none;
         margin-right: 75px;
       }
+    }
+
+    .avatar-wrapper {
+      cursor: pointer;
     }
   }
 </style>

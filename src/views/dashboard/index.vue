@@ -6,6 +6,11 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Dashboard'
+  name: 'Dashboard',
+  created() {
+    if (!this.$store.getters.hasWorkspace) {
+      this.$router.replace({ name: 'Welcome' })
+    }
+  }
 }
 </script>

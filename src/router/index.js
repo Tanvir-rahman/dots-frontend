@@ -54,14 +54,25 @@ const routes = [
     ]
   },
   {
+    path: '/dashboard',
+    redirect: 'ws/redirect'
+  },
+  {
     path: '/',
     component: Main,
-    redirect: '/dashboard',
+    redirect: 'ws/redirect',
     children: [
       {
-        path: 'dashboard',
+        path: 'ws/redirect',
+        hidden: true,
+        name: 'WorkspaceRedirect',
+        component: () => import('@/views/workspace/redirect')
+      },
+      {
+        path: 'ws/:slug',
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
         name: 'Dashboard',
+        props: true,
         meta: {
           title: 'dashboard'
         }
@@ -145,6 +156,21 @@ const routes = [
     path: '/404',
     name: 'error404',
     component: () => import('@/views/error/404.vue')
+  },
+  {
+    path: '/welcome',
+    component: Main,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "workspace" */ '@/views/workspace/Welcome.vue'),
+        name: 'Welcome',
+        meta: {
+          title: 'Welcome'
+        }
+      }
+    ]
   }
 ]
 

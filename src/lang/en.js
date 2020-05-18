@@ -10,6 +10,12 @@ export default {
     reports: 'Reports',
     tables: 'Tables'
   },
+  main: {
+    confirmLogout: 'Are you sure you want to log out?',
+    profile: '{username} profile',
+    addWorkspace: 'Add Workspace',
+    workspaceSettings: 'Workspace Settings'
+  },
   login: {
     username: 'Email or username',
     password: 'Password',
@@ -72,5 +78,20 @@ export default {
     'successDelete': '{table} was successfully deleted',
     'successEdit': '{table} was successfully edited',
     'successCreate': '{table} was successfully created'
+  },
+  workspace: {
+    welcome: 'Welcome',
+    startByCreating: 'Start by creating a workspace',
+    createWorkspace: 'Create Workspace',
+    addWorkspace: 'Add Workspace',
+    workspaceName: 'Workspace name',
+    myWorkspace: 'My Workspace',
+    workspaceEmail: 'Workspace email',
+    description: 'Description',
+    website: 'Website',
+    location: 'Location',
+    urlHint: 'This will be the name of your workspace on Dots. Your URL will be: https://dots.hikaya.app/ws/{name}.',
+    workspaceCreated: 'Workspace created successfully.',
+    workspaceFailure: 'Failed to create workspace.'
   }
 }

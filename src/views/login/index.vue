@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" class="login-form" :model="formData" :rules="rules">
+    <el-form ref="loginForm" v-loading="loading" class="login-form" :model="formData" :rules="rules">
       <div class="header">
         <h2>{{ $t('login.header') }}</h2>
       </div>
@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item>
         <span>{{ $t('login.noAccount') }}<br><router-link class="register" :to="{name: 'Register'}">{{ $t('register.register') }}</router-link></span>
-        <h-button :loading="loading" type="primary" @click="login('loginForm')">{{ $t('login.login') }}</h-button>
+        <h-button type="primary" @click="login('loginForm')">{{ $t('login.login') }}</h-button>
       </el-form-item>
     </el-form>
   </div>
