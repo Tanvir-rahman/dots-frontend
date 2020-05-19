@@ -17,3 +17,18 @@ or
 ```js
 this.$t('navbar.hello') // Vue script section
 ```
+
+### API Calls
+By default, all data sent and received is transformed to the appropriate case i.e data from the API is transformed
+from `snake_case` to `camelCase` and vice versa. If you want to disable this transformation, when calling the `requests`
+object, pass `false` as a parameter e.g:
+```javascript
+import request from '@/utils/request'
+
+export function login(data) {
+  // Pass false as a parameter
+  return request(false)({
+    ...
+  })
+}
+```
