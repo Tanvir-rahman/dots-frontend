@@ -151,6 +151,19 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/workspace',
+    name: 'Workspace',
+    component: Main,
+    children: [
+      {
+        path: '',
+        component: () =>
+          import('@/views/workspace/index.vue'),
+        name: 'WorkspaceDetails'
+      }
+    ]
+  },
   { path: '*', redirect: { name: 'error404' }},
   {
     path: '/404',
