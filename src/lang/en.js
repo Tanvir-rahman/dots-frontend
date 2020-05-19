@@ -45,6 +45,8 @@ export default {
   },
   tables: {
     importLabel: 'Import Data',
+    tableConfig: 'Configurations',
+    setConfigs: 'Set Table Configurations',
     importCsv: 'Import CSV Data',
     listTable: {
       tableUuid: 'Table uuid',
@@ -55,10 +57,19 @@ export default {
     },
     csvImportForm: {
       name: 'Name',
+      nameHelpText: 'Leave blank to default to the source form/file name',
       uniqueColumn: 'Unique column',
       attachFiles: 'attach csv files with a size less than 500kb',
       drag: 'Drop file here or',
-      clickUpload: 'click to upload'
+      clickUpload: 'click to upload',
+      selectForm: 'Select {source} Form'
+    },
+    tableConfigForm: {
+      uniqueColumn: 'Unique column',
+      latitude: 'Latitude field',
+      longitude: 'Longitude field',
+      geoLocation: 'Geolocation point field',
+      mapToolTipField: 'Point tool-tip field'
     }
   },
   actionVerbs: {
@@ -68,9 +79,10 @@ export default {
     add: 'Add'
   },
   notifications: {
-    'successDelete': '{table} was successfully deleted',
-    'successEdit': '{table} was successfully edited',
-    'successCreate': '{table} was successfully created'
+    successDelete: '{table} was successfully deleted',
+    successEdit: '{table} was successfully edited',
+    successCreate: '{table} was successfully created',
+    successConfigSave: '{table} configs were successfully saved'
   },
   workspace: {
     welcome: 'Welcome',

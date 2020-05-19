@@ -9,9 +9,12 @@ import { Message } from 'element-ui'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000,
-  transformResponse: [...axios.defaults.transformResponse, data => {
-    return camelcaseKeys(data, { deep: true })
-  }]
+  transformResponse: [
+    ...axios.defaults.transformResponse,
+    data => {
+      return camelcaseKeys(data, { deep: false })
+    }
+  ]
 })
 
 service.interceptors.request.use(
@@ -52,7 +55,9 @@ service.interceptors.response.use(
         })
       } else {
         console.log('Refreshing access token')
-        const refreshData = await service.post('token/refresh', { refresh: getRefreshToken() })
+        const refreshData = await service.post('token/refresh', {
+          refresh: getRefreshToken()
+        })
         await store.dispatch('user/setToken', refreshData.access)
         return service(origRequest)
       }

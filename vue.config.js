@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const webpack = require('webpack')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -52,7 +53,7 @@ function configSVGIcon(config) {
   // Exclude SVG sprite directory from default svg rule
   config.module
     .rule('svg')
-    .exclude.add(path.resolve(__dirname, './src/svg-icons'))
+    .exclude.add(path.resolve(__dirname, './src/icons/svg'))
     .end()
 
   // Options used by svgo-loader to optimize SVG files
@@ -137,6 +138,11 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        mapboxgl: 'mapbox-gl'
+      })
+    ]
   }
 }

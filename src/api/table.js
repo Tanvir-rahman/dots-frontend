@@ -56,3 +56,25 @@ export function deleteTable(uuid) {
     method: 'delete'
   })
 }
+
+/**
+ * get table's GeoJson Data
+ * @param { string } uuid: table uuid identifier
+ */
+export function getGeoJsonData(uuid) {
+  return request({
+    url: `/tables/geojson/${uuid}/`,
+    method: 'get'
+  })
+}
+
+/**
+ * Get 3rd party forms
+ * @param source
+ */
+export function getThirdPartyForms(source) {
+  return request({
+    url: `/tables/data/forms/?source=${source}`,
+    method: 'get'
+  })
+}

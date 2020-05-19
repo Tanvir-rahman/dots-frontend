@@ -3,20 +3,26 @@ import {
   getTableDetails,
   postTable,
   editTable,
-  deleteTable
+  deleteTable,
+  getGeoJsonData,
+  getThirdPartyForms
 } from '@/api/table'
 import { mapArrayEntities } from '@/utils/data.utils'
 
 const state = {
   tables: {},
-  dataset: {}
+  dataset: {},
+  geoJsonData: {},
+  thirdPartyForms: []
 }
 
 const mutationTypes = {
   SET_TABLES: '[Tables] Set Tables',
   SET_TABLE: '[Tables] Add Table',
   SET_TABLE_DETAILS: '[Tables] Set Table Details',
-  DELETE_TABLE: '[Tables] Delete Table'
+  DELETE_TABLE: '[Tables] Delete Table',
+  SET_MAP_DATA: '[Tables] Set Map Data',
+  SET_THIRD_PARTY_FORMS: '[Tables] Third Party Forms'
 }
 
 const mutations = {
@@ -33,6 +39,12 @@ const mutations = {
   [mutationTypes.DELETE_TABLE]: (state, tableUuid) => {
     delete state.tables[tableUuid]
     state.tables = { ...state.tables }
+  },
+  [mutationTypes.SET_MAP_DATA]: (state, payload) => {
+    state.geoJsonData = payload
+  },
+  [mutationTypes.SET_THIRD_PARTY_FORMS]: (state, payload) => {
+    state.thirdPartyForms = payload
   }
 }
 
@@ -41,7 +53,9 @@ export const tableActions = {
   CREATE_TABLE: '[Tables] Create Table',
   GET_TABLE_DETAILS: '[Tables] Get Table Details',
   EDIT_TABLE: '[Tables] Edit Table',
-  DELETE_TABLE: '[Tables] Delete Table'
+  DELETE_TABLE: '[Tables] Delete Table',
+  GET_MAP_DATA: '[Tables] Get Map Data',
+  GET_THIRD_PARTY_FORMS: '[Tables] Get Third Party Forms'
 }
 
 const actions = {
@@ -114,12 +128,33 @@ const actions = {
     deleteTable(uuid).then(() => {
       commit(mutationTypes.DELETE_TABLE, uuid)
     })
+  },
+
+  async [tableActions.GET_MAP_DATA]({ commit }, tableUuid) {
+    try {
+      const response = await getGeoJsonData(tableUuid)
+      commit(mutationTypes.SET_MAP_DATA, response)
+      return response
+    } catch (e) {
+      throw new Error(`${tableActions.GET_MAP_DATA} failed with ${e}`)
+    }
+  },
+  async [tableActions.GET_THIRD_PARTY_FORMS]({ commit }, source) {
+    try {
+      const response = await getThirdPartyForms(source)
+      commit(mutationTypes.SET_THIRD_PARTY_FORMS, response)
+      return response
+    } catch (e) {
+      throw new Error(`${tableActions.GET_THIRD_PARTY_FORMS} failed with ${e}`)
+    }
   }
 }
 
 const getters = {
   getAllTables: state => Object.values(state.tables).sort((a, b) => a - b),
-  getTableDetails: state => state.dataset
+  getTableDetails: state => state.dataset,
+  getMapData: state => state.geoJsonData,
+  getThirdPartyForms: state => state.thirdPartyForms
 }
 
 export default {
