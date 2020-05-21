@@ -5,7 +5,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-import VueUiComponents from '@hikaya/vue-ui-components'
+import VueUiComponents from '@hikaya/hakawati'
 
 import i18n from './lang' // internalization
 import './icons' // icon

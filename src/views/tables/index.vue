@@ -4,7 +4,16 @@
     <template>
       <div class="table-list__item-list">
         <div class="table-list__import-btn">
-          <h-button type="primary" @click="showModal = true">{{ $t('tables.importLabel') }}</h-button>
+          <el-dropdown @click="showModal = true" @command="sourceSelected">
+            <el-button type="primary">
+              {{ $t('tables.importLabel') }}<i class="el-icon-arrow-down el-icon--right" />
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item :command="'csv'">Csv</el-dropdown-item>
+              <el-dropdown-item :command="'kobo'">KOBO</el-dropdown-item>
+              <el-dropdown-item :command="'ona'">ONA</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
 
         <div class="table-list__table-cont">
@@ -77,7 +86,12 @@
       destroy-on-close
       @close="modalClosed"
     >
-      <import-csv-form :table="currentTable" @closeModal="modalClosed" />
+      <import-csv-form
+        :table="currentTable"
+        :source="tableSource"
+        :third-party-forms="thirdPartyForms"
+        @closeModal="modalClosed"
+      />
     </el-dialog>
   </div>
 </template>
@@ -97,7 +111,9 @@ export default {
     return {
       showModal: false,
       loading: false,
-      currentTable: null
+      currentTable: null,
+      tableSource: '',
+      thirdPartyForms: null
     }
   },
   computed: {
@@ -156,6 +172,23 @@ export default {
     modalClosed() {
       this.showModal = false
       this.currentTable = null
+    },
+
+    /**
+       * trigger when a table source is selected
+       * @param event
+       */
+    sourceSelected(event) {
+      this.tableSource = event.toLowerCase()
+      if (this.tableSource !== 'csv') {
+        this.$store.dispatch(
+          `tables/${tableActions.GET_THIRD_PARTY_FORMS}`,
+          this.tableSource
+        ).then((forms) => {
+          this.thirdPartyForms = forms
+        })
+      }
+      this.showModal = true
     }
   }
 }

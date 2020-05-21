@@ -1,14 +1,14 @@
 import request from '@/utils/request'
 
 export function getWorkspaces() {
-  return request({
+  return request()({
     url: '/workspace/',
     method: 'get'
   })
 }
 
 export function createWorkspace(data) {
-  return request({
+  return request()({
     url: '/workspace/',
     method: 'post',
     data
