@@ -8,21 +8,21 @@ export default {
       tableData: [
         {
           name: 'Tom',
-          email: 'California',
+          email: 'tom@place.com',
           lastlogin: '2020-07-02',
           Role: 'Member',
           Status: 'Active'
         },
         {
           name: 'John',
-          email: 'Andalucia',
+          email: 'john@doe.com',
           lastlogin: '2020-07-02',
           Role: 'Member',
           Status: 'Inactive'
         },
         {
           name: 'John',
-          email: 'Andalucia',
+          email: 'john@here.com',
           lastlogin: '2020-07-02',
           Role: 'Member',
           Status: 'Active'

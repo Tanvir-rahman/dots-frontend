@@ -2,7 +2,7 @@
   <div>
     <el-row type="flex" justify="center" class="spacer">
       <el-col :span="12">
-        <h2>Workspace Usessrs</h2>
+        <h2>Workspace Users</h2>
       </el-col>
       <el-col :span="6">
         <h-search placeholder="Search user name or email" clearable />
