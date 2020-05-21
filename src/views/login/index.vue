@@ -2,19 +2,43 @@
   <div class="login-container">
     <el-form ref="loginForm" v-loading="loading" class="login-form" :model="formData" :rules="rules">
       <div class="header">
-        <h2>{{ $t('login.header') }}</h2>
+        <span class="heading">{{ $t('login.header') }}</span>
       </div>
       <el-form-item prop="username">
-        <el-input v-model="formData.username" prefix-icon="el-icon-user" :placheholder="$t('login.username')" />
+        <span class="svg-container">
+          <svg-icon icon-name="user" />
+        </span>
+        <el-input
+          v-model="formData.username"
+          :placheholder="$t('login.username')"
+        />
       </el-form-item>
-      <el-form-item prop="password">
-        <el-input ref="password" v-model="formData.password" prefix-icon="el-icon-lock" :placheholder="$t('login.password')" show-password />
-        <router-link class="forgot-password" to="">{{ $t('login.forgotPassword') }}</router-link>
-      </el-form-item>
-      <el-form-item>
+      <el-tooltip v-model="capsTooltip" :content="$t('login.capsLockOn')" placement="right" manual>
+        <el-form-item prop="password">
+          <span class="svg-container">
+            <svg-icon icon-name="password" />
+          </span>
+          <el-input
+            ref="password"
+            v-model="formData.password"
+            :placheholder="$t('login.password')"
+            :type="passwordType"
+            @keyup.native="checkCapslock"
+            @blur="capsTooltip = false"
+            @keyup.enter.native="login"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-name="passwordType === 'password' ? 'eye-off' : 'eye-on'" />
+          </span>
+        </el-form-item>
+      </el-tooltip>
+      <div class="forgot-password-container">
+        <router-link class="forgot-password body-reg" to="">{{ $t('login.forgotPassword') }}</router-link>
+      </div>
+      <div class="actions">
         <span>{{ $t('login.noAccount') }}<br><router-link class="register" :to="{name: 'Register'}">{{ $t('register.register') }}</router-link></span>
         <h-button type="primary" @click="login('loginForm')">{{ $t('login.login') }}</h-button>
-      </el-form-item>
+      </div>
     </el-form>
   </div>
 </template>
@@ -39,6 +63,7 @@ export default {
       },
       loading: false,
       passwordType: 'password',
+      capsTooltip: false,
       redirect: undefined,
       otherQuery: {}
     }
@@ -56,6 +81,10 @@ export default {
     }
   },
   methods: {
+    checkCapslock(e) {
+      const { key } = e
+      this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -95,6 +124,54 @@ export default {
 }
 </script>
 
+<style lang="scss">
+  $bg: $background-color;
+  .login-container {
+    .el-input {
+      display: inline-block;
+      height: 47px;
+      width: 85%;
+
+      input {
+        background: transparent;
+        border: 0;
+        -webkit-appearance: none;
+        border-radius: 0;
+        padding: 12px 5px 12px 5px;
+        height: 47px;
+        color: $dark-body-grey;
+        caret-color: $primary-color;
+
+        &::placeholder {
+          color: $dark-body-grey;
+          opacity: 1;
+        }
+
+        &:-ms-input-placeholder {
+          color: $dark-body-grey;
+        }
+
+        &::-ms-input-placeholder {
+          color: $dark-body-grey;
+        }
+
+        &:-webkit-autofill {
+          box-shadow: 0 0 0 1000px $heading-grey inset !important;
+          -webkit-text-fill-color: $primary-color !important;
+        }
+      }
+    }
+
+    .el-form-item {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: $bg;
+      border-radius: 6px;
+      box-sizing: border-box;
+      color: $dark-body-grey;
+    }
+  }
+</style>
+
 <style scoped lang="scss">
   $bg: $heading-grey;
   $light_gray:$heading-grey;
@@ -104,39 +181,53 @@ export default {
     vertical-align: middle;
     min-height: 100%;
     width: 100%;
+    overflow: hidden;
 
     .login-form {
       position: relative;
-      width: 300px;
+      width: 360px;
       max-width: 100%;
       padding: 160px 35px 0;
       margin: 0 auto;
       overflow: hidden;
     }
 
-    .el-input {
-      height: 47px;
-
-      input {
-        height: 47px;
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      span {
+        color: $primary-color;
       }
     }
 
-    .header {
-      margin-bottom: 40px;
-      color: $primary-color;
+    .svg-container {
+      padding: 6px 5px 6px 15px;
+      color: $heading-grey ;
+      vertical-align: middle;
+      width: 30px;
+      display: inline-block;
     }
 
-    .el-form-item {
-      border-radius: 5px;
-      color: $dark-body-grey;
-      margin-bottom: 30px;
+    .show-pwd {
+      position: absolute;
+      right: 10px;
+      top: 7px;
+      font-size: 16px;
+      color: $heading-grey;
+      cursor: pointer;
+      user-select: none;
+    }
 
+    .forgot-password-container {
+      height: 20px;
+      margin-bottom: 70px;
       .forgot-password {
         float: right;
-        color: $light-body-grey;
       }
+    }
 
+    .actions {
+      height: 80px;
       .el-button {
         float: right;
         min-width: 30%;
