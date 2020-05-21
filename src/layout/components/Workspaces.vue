@@ -97,7 +97,10 @@ export default {
     createWorkspace() {
       EventBus.$emit(TOGGLE_WORKSPACE_DRAWER)
     },
-    goToWorkspaceSettings() {}
+    goToWorkspaceSettings() {
+      this.$router.push('/workspace')
+      this.show = false
+    }
   }
 }
 </script>

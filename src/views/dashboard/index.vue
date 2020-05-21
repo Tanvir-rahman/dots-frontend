@@ -1,12 +1,5 @@
 <template>
-  <div class="dashboard">
-    <el-row>
-      <el-col :span="24">Workspace Details</el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="24">Workspace Details</el-col>
-    </el-row>
-  </div>
+  <div class="dashboard" />
 </template>
 
 <script>

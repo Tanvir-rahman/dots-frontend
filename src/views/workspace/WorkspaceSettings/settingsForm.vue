@@ -56,7 +56,7 @@
                   </el-form-item>
                 </el-col>
                 <el-col :span="6" class="text-right">
-                  <h-button size="medium" type="primary" class="body-bold button-style">Save</h-button>
+                  <h-button size="medium" type="primary" class="body-bold button-style" @click="updateWorkspace">{{ $t('actionVerbs.save') }}</h-button>
                 </el-col>
               </el-row>
             </h-form>
@@ -70,6 +70,21 @@
 <script>
 export default {
   name: 'WorkspaceDetails',
+  props: {
+    workspace: {
+      type: Object,
+      default: () => {
+        return {
+          name: '',
+          email: '',
+          description: '',
+          website: '',
+          location: '',
+          slug: ''
+        }
+      }
+    }
+  },
   data: function() {
     return {
       show: false,
@@ -104,6 +119,14 @@ export default {
       },
       hintName: '',
       creatingWorkspace: false
+    }
+  },
+  created() {
+    this.workspaceDetailsForm = this.workspace
+  },
+  methods: {
+    updateWorkspace() {
+      console.log('clicked')
     }
   }
 }
