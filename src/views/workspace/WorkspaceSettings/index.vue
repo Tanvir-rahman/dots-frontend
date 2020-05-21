@@ -3,7 +3,6 @@
     <el-row type="flex" justify="center" class="spacer">
       <el-col :span="24">
         <h2>Workspace Details</h2>
-        {{ getDefaultWorkspace }}
       </el-col>
     </el-row>
     <settings-form :workspace="getDefaultWorkspace" />

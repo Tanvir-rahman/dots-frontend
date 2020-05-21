@@ -18,10 +18,6 @@
                       v-model="workspaceDetailsForm.name"
                       :placeholder="$t('workspace.myWorkspace')"
                     />
-                    <span
-                      v-if="workspaceDetailsForm.name"
-                      class="info url-hint"
-                    >{{ $t('workspace.urlHint', { name: slug }) }}</span>
                   </el-form-item>
                 </el-col>
               </el-row>

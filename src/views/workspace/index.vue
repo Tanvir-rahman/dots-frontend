@@ -6,7 +6,7 @@
       <el-tab-pane label="Details" name="first">
         <workspace-settings />
       </el-tab-pane>
-      <el-tab-pane label="People" name="second">People</el-tab-pane>
+      <el-tab-pane label="People" name="second"><workspace-users /></el-tab-pane>
       <el-tab-pane label="Configurations" name="third">Configurations</el-tab-pane>
     </el-tabs>
   </div>
@@ -14,10 +14,12 @@
 
 <script>
 import WorkspaceSettings from './WorkspaceSettings/index'
+import WorkspaceUsers from './users/index'
 export default {
   name: 'WorkspaceIndex',
   components: {
-    WorkspaceSettings
+    WorkspaceSettings,
+    WorkspaceUsers
   }
 }
 </script>
