@@ -8,7 +8,8 @@
     "inspect": "vue-cli-service inspect",
     "test:unit": "vue-cli-service test:unit",
     "lint": "eslint --ext .js,.vue src",
-    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
+    "serve:prod": "serve -s dist"
   },
   "dependencies": {
     "@hikaya/hakawati": "^0.1.1",
