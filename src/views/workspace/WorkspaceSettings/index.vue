@@ -6,7 +6,6 @@
       </el-col>
     </el-row>
     <settings-form :workspace="getDefaultWorkspace" />
-    {{ getDefaultWorkspace }}
     <danger-zone />
   </div>
 </template>
@@ -22,12 +21,12 @@ export default {
     settingsForm,
     dangerZone
   },
+  data() {
+    return {}
+  },
   computed: {
     ...mapGetters(['name', 'username']),
     ...mapGetters('workspace', ['getDefaultWorkspace', 'getOtherWorkspaces'])
-  },
-  data() {
-    return {}
   }
 }
 </script>
