@@ -3,8 +3,9 @@ export const layers = {
     type: 'fill',
     layout: {},
     paint: {
-      'fill-color': '#00CCCC',
-      'fill-opacity': 0.5
+      'fill-color': '#EBEBFF',
+      'fill-opacity': 0.5,
+      'fill-outline-color': '#3333FF'
     }
   },
 
@@ -12,7 +13,7 @@ export const layers = {
     type: 'circle',
     layout: {},
     paint: {
-      'circle-color': '#FF3333'
+      'circle-color': '#33CCCC'
     }
   }
 }

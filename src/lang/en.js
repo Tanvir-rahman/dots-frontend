@@ -22,7 +22,8 @@ export default {
     login: 'Log in',
     header: 'Log in to Dots',
     noAccount: 'Don\'t have an account',
-    forgotPassword: 'Forgot Password'
+    forgotPassword: 'Forgot Password',
+    capsLockOn: 'Caps lock is On'
   },
   register: {
     createAccount: 'Create an account',
