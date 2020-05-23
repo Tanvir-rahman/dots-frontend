@@ -6,46 +6,49 @@
     >
     <link href="https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css" rel="stylesheet">
     <el-container style="height:90vh; border: 1px solid #eee">
-      <el-aside width="200px">
-        <el-menu :default-openeds="['1', '3']">
-          <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message" />Admin Boundaries</template>
-            <el-menu-item-group>
-              <template slot="title">Levels</template>
-              <el-menu-item index="1-1" @click="adminLevelSelected('ADM0')">Admin Level 0</el-menu-item>
-              <el-menu-item index="1-2" @click="adminLevelSelected('ADM1')">Admin Level 1</el-menu-item>
-              <el-menu-item index="1-2" @click="adminLevelSelected('ADM2')">Admin Level 2</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu" />Accessible Countries</template>
-            <el-menu-item-group>
-              <template slot="title">Countries</template>
-              <el-menu-item
-                v-for="item in countries"
-                :key="item.code"
-                index="2-1"
-                @click="countrySelected(item)"
-              >{{ item.country }}
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-menu" />My Tables</template>
-            <el-menu-item-group>
-              <template slot="title">Tables</template>
-              <el-menu-item
-                v-for="item in tableList"
-                :key="item.tableUuid"
-                index="2-1"
-                @click="loadMapData(item)"
-              >{{ item.name }}
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
-      </el-aside>
+      <collapse-nav default-active="1">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-school" />
+            <span slot="title">Country</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item
+              v-for="item in countries"
+              :key="item.code"
+              index="2-1"
+              @click="countrySelected(item)"
+            >{{ item.country }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-coordinate" />
+            <span slot="title">Admin Boundary</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="1-1" @click="adminLevelSelected('ADM0')">Admin Level 0</el-menu-item>
+            <el-menu-item index="1-2" @click="adminLevelSelected('ADM1')">Admin Level 1</el-menu-item>
+            <el-menu-item index="1-2" @click="adminLevelSelected('ADM2')">Admin Level 2</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title">
+            <i class="el-icon-pie-chart" />
+            <span slot="title">Data</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item
+              v-for="item in tableList"
+              :key="item.tableUuid"
+              index="2-1"
+              @click="loadMapData(item)"
+            >{{ item.name }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+      </collapse-nav>
 
       <el-container>
         <el-main>
@@ -323,7 +326,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .loading {
     display: flex;
     flex-direction: row;
@@ -334,4 +337,13 @@ export default {
     width: 100%;
     height: 85vh;
   }
+
+  .maps {
+  .el-menu-item {
+    height: auto;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
 </style>

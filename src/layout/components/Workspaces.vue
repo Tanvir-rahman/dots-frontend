@@ -15,7 +15,7 @@
         <span class="username body-bold">
           {{ $t('main.profile', { username: username }) }}
         </span>
-        <span class="logout body-reg" @click="logout"><svg-icon icon-name="logout" />{{ $t('navbar.logout') }}</span>
+        <span class="logout body-reg" @click="logout"><svg-icon icon-name="logout" /> {{ $t('navbar.logout') }}</span>
       </div>
       <div class="workspaces">
         <h-card class="default">
@@ -131,6 +131,7 @@ export default {
       .logout {
         margin-left: auto;
         cursor: pointer;
+        text-align: center;
       }
     }
 
