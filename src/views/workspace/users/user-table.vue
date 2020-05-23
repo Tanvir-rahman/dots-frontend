@@ -1,32 +1,27 @@
 <template>
-  <h-table :table-data="tableData" />
+  <h-table :table-data="users" />
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { getWorkspaceUsers } from '@/api/workspace'
+
 export default {
+  name: 'UserTable',
+  computed: {
+    ...mapGetters('workspace', ['getDefaultWorkspace', 'getOtherWorkspaces'])
+  },
+  created() {
+    this.fetchUsers()
+  },
+  methods: {
+    async fetchUsers() {
+      this.users = await getWorkspaceUsers(this.getDefaultWorkspace.id)
+    }
+  },
   data() {
     return {
-      tableData: [
-        {
-          name: 'Tom',
-          email: 'tom@place.com',
-          lastlogin: '2020-07-02',
-          Role: 'Member',
-          Status: 'Active'
-        },
-        {
-          name: 'John',
-          email: 'john@doe.com',
-          lastlogin: '2020-07-02',
-          Role: 'Member',
-          Status: 'Inactive'
-        },
-        {
-          name: 'John',
-          email: 'john@here.com',
-          lastlogin: '2020-07-02',
-          Role: 'Member',
-          Status: 'Active'
-        }
+      users: [
+
       ]
     }
   }

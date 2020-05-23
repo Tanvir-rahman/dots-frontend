@@ -160,7 +160,7 @@ const routes = [
         path: '',
         component: () =>
           import('@/views/workspace/index.vue'),
-        name: 'WorkspaceDetails'
+        name: 'WorkspaceSettings'
       }
     ]
   },

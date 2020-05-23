@@ -6,7 +6,7 @@
       </el-col>
     </el-row>
     <settings-form :workspace="getDefaultWorkspace" />
-
+    {{ getDefaultWorkspace }}
     <danger-zone />
   </div>
 </template>

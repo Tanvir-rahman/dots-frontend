@@ -23,6 +23,7 @@
 </template>
 <script>
 import UserTable from './user-table'
+
 export default {
   name: 'WorkspaceUsers',
   components: {

@@ -98,7 +98,7 @@ export default {
       EventBus.$emit(TOGGLE_WORKSPACE_DRAWER)
     },
     goToWorkspaceSettings() {
-      this.$router.push('/workspace')
+      this.$router.push({ name: 'WorkspaceSettings' })
       this.show = false
     }
   }
