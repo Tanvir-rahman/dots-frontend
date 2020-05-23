@@ -8,7 +8,7 @@
         <h-search placeholder="Search user name or email" clearable />
       </el-col>
       <el-col :span="3" class="text-center">
-        <h-filter />
+        <h-filter class="no-shadow" />
       </el-col>
       <el-col :span="3" class="text-center">
         <h-button type="primary">{{ $t('actionVerbs.save') }}</h-button>

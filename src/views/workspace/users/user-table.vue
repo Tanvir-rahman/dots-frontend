@@ -1,5 +1,41 @@
 <template>
-  <h-table :table-data="users" />
+  <el-table
+    :data="users"
+    style="width: 100%"
+  >
+    <el-table-column
+      prop="fullName"
+      label="Name"
+    />
+    <el-table-column
+      prop="email"
+      label="Email"
+    />
+    <el-table-column
+      prop="lastLogin"
+      label="Last login"
+    >
+      <template slot-scope="scope">
+        {{ $moment(scope.row.lastLogin).fromNow() }}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="role"
+      label="Role"
+      filter-placement="bottom-end"
+    >
+      <template slot-scope="scope">
+        <el-tag
+          :type="scope.row.role === 'Member' ? 'primary' : 'success'"
+          disable-transitions
+        >{{ scope.row.role }}</el-tag>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="isActive"
+      label="Status"
+    />
+  </el-table>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -7,6 +43,11 @@ import { getWorkspaceUsers } from '@/api/workspace'
 
 export default {
   name: 'UserTable',
+  data() {
+    return {
+      users: []
+    }
+  },
   computed: {
     ...mapGetters('workspace', ['getDefaultWorkspace', 'getOtherWorkspaces'])
   },
@@ -16,13 +57,6 @@ export default {
   methods: {
     async fetchUsers() {
       this.users = await getWorkspaceUsers(this.getDefaultWorkspace.id)
-    }
-  },
-  data() {
-    return {
-      users: [
-
-      ]
     }
   }
 }
