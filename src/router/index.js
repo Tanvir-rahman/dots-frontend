@@ -76,6 +76,18 @@ const routes = [
         meta: {
           title: 'dashboard'
         }
+      },
+      {
+        path: '/ws/:slug/settings',
+        name: 'Workspace',
+        component: () =>
+          import('@/views/workspace/index.vue'),
+        children: [
+          {
+            path: '',
+            name: 'WorkspaceSettings'
+          }
+        ]
       }
     ]
   },
@@ -148,19 +160,6 @@ const routes = [
         meta: {
           title: 'Table Data'
         }
-      }
-    ]
-  },
-  {
-    path: '/workspace',
-    name: 'Workspace',
-    component: Main,
-    children: [
-      {
-        path: '',
-        component: () =>
-          import('@/views/workspace/index.vue'),
-        name: 'WorkspaceSettings'
       }
     ]
   },
