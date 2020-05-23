@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tabs tab-position="left" active-name="first">
+    <h-tab tab-position="left" active-name="first">
       <el-tab-pane label="Workspace Settings" disabled />
       <el-tab-pane label="Workspace 1" disabled />
       <el-tab-pane label="Details" name="first">
@@ -8,7 +8,7 @@
       </el-tab-pane>
       <el-tab-pane label="People" name="second"><workspace-users /></el-tab-pane>
       <el-tab-pane label="Configurations" name="third"><workspace-config /></el-tab-pane>
-    </el-tabs>
+    </h-tab>
   </div>
 </template>
 
