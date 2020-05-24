@@ -2,7 +2,7 @@
 export default {
   created() {
     const { slug } = this.$store.getters['workspace/getDefaultWorkspace']
-    if (slug !== undefined) {
+    if (slug) {
       this.$router.push({
         name: 'Dashboard',
         params: {
