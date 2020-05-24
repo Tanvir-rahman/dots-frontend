@@ -2,7 +2,7 @@ import { getWorkspaces } from '@/api/workspace'
 
 const state = {
   workspaces: [],
-  defaultWorkspace: undefined,
+  defaultWorkspace: {},
   workspacesLoaded: false
 }
 
@@ -29,7 +29,7 @@ const actions = {
   async [workspaceActions.GET_WORKSPACES]({ commit }) {
     try {
       const workspaces = await getWorkspaces()
-      if (workspaces) {
+      if (workspaces.length !== 0) {
         const defaultWorkspace = workspaces.filter(ws => ws.isDefault)[0]
         commit(mutationTypes.SET_DEFAULT_WORKSPACE, defaultWorkspace)
       }

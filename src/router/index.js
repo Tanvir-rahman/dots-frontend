@@ -60,7 +60,7 @@ const routes = [
   {
     path: '/',
     component: Main,
-    redirect: 'ws/redirect',
+    redirect: { name: 'WorkspaceRedirect' },
     children: [
       {
         path: 'ws/redirect',

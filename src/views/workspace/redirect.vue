@@ -2,7 +2,18 @@
 export default {
   created() {
     const { slug } = this.$store.getters['workspace/getDefaultWorkspace']
-    this.$router.replace({ path: '/ws/' + slug })
+    if (slug !== undefined) {
+      this.$router.push({
+        name: 'Dashboard',
+        params: {
+          slug: slug
+        }
+      })
+    } else {
+      this.$router.push({
+        name: 'Welcome'
+      })
+    }
   },
   render: function(h) {
     return h() // avoid warning message
