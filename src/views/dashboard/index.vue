@@ -9,7 +9,9 @@ export default {
   name: 'Dashboard',
   created() {
     if (!this.$store.getters.hasWorkspace) {
-      this.$router.replace({ name: 'Welcome' })
+      this.$router.push({
+        name: 'Welcome'
+      })
     }
   }
 }
